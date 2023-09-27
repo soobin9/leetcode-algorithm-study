@@ -6,19 +6,26 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        checks = dict()
-        for num in nums:
-            if num in checks:
-                checks[num] = checks[num] + 1
-            else:
-                checks[num] = 1 
+        count = {}
+        freq = [[] for i in range(len(nums) + 1)]
         
-        # 빈도수로 정렬 
-        print(checks.items())
-        checks = sorted(checks.items(), key=lambda item: item[1], reverse=True )
+        # num 별 count  
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)
+            
+        for n,c in count.items():
+            freq[c].append(n)
+            
+        res = []
         
-        result = []
-        for i, num in enumerate(checks):
-            if i < k:
-                result.append(checks[i][0])
-        return result
+        # 뒤에서부터 시작 
+        for i in range(len(freq) - 1, 0, -1):
+            for n in freq[i]:
+                res.append(n)
+                if len(res) == k:
+                    return res 
+                    
+        # O(n) -> bucket sort 
+            
+        
+        print(count)
