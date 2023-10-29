@@ -32,20 +32,34 @@ class Solution(object):
         if not height:
             return 0 
         
-        l, r = 0, len(height) - 1
-        leftMax, rightMax = height[l], height[r]
-        res = 0 
+#         l, r = 0, len(height) - 1
+#         leftMax, rightMax = height[l], height[r]
+#         res = 0 
         
-        while l < r:
+#         while l < r:
+#             if leftMax < rightMax:
+#                 l += 1
+#                 leftMax = max(leftMax, height[l])
+#                 res += leftMax - height[l]
+#             else:
+#                 r -= 1 
+#                 rightMax = max(rightMax, height[r])
+#                 res += rightMax - height[r]
+
+
+        # chatgpt 통해 for문으로 변경 
+        left, right = 0, len(height) - 1
+        leftMax, rightMax = height[left], height[right]
+        res = 0
+
+        for i in range(len(height)):
             if leftMax < rightMax:
-                l += 1
-                leftMax = max(leftMax, height[l])
-                res += leftMax - height[l]
+                leftMax = max(leftMax, height[left])
+                res += leftMax - height[left]
+                left += 1
             else:
-                r -= 1 
-                rightMax = max(rightMax, height[r])
-                res += rightMax - height[r]
-            
-    
-        
+                rightMax = max(rightMax, height[right])
+                res += rightMax - height[right]
+                right -= 1
+
         return res
