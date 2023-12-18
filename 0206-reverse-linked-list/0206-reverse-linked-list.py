@@ -29,6 +29,8 @@ class Solution(object):
         return head
         """
         
+        # time complexity o(n), memory complexity o(1)
+        """
         prev, cur = None, head 
         
         while cur:
@@ -38,6 +40,19 @@ class Solution(object):
             cur = nxt 
             
         return prev
+        """
+        
+         # time complexity o(n), memory complexity o(n)
+        if not head:
+            return None
+        
+        newHead = head 
+        if head.next:
+            newHead = self.reverseList(head.next)
+            head.next.next = head
+        head.next = None
+        
+        return newHead
         
         
         
